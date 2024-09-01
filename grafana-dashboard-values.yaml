@@ -612,15 +612,20 @@ plugins: []
 ## Configure grafana datasources
 ## ref: http://docs.grafana.org/administration/provisioning/#datasources
 ##
-datasources: {}
-#  datasources.yaml:
-#    apiVersion: 1
-#    datasources:
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
 #    - name: Prometheus
 #      type: prometheus
-#      url: http://prometheus-prometheus-server
+#      url: http://prometheus-stack-kube-prom-prometheus.default:9090
 #      access: proxy
-#      isDefault: true
+#      isDefault: true 
+    - name: mimir
+      type: prometheus
+      url: http://mimir-distributed-nginx.grafana.svc:80/prometheus 
+      access: proxy
+      isDefault: false
 #    - name: CloudWatch
 #      type: cloudwatch
 #      access: proxy

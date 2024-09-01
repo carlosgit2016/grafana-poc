@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-dashboard 
+  namespace: argocd
+spec:
+  destination:
+    namespace: grafana
+    server: https://cflorcluster-og1ijw6y.hcp.eastus2.azmk8s.io
+  project: default 
+  source:
+    repoURL: https://github.com/carlosgit2016/grafana-poc 
+    targetRevision: HEAD 
+    path: "/"
+    directory:
+      recurse: true
+      jsonnet: {}
+      include: 'grafana-dashboard-values.yaml'
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
